@@ -1,0 +1,359 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><title>Walkthrough | Shale Docs</title>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Detailed walkthrough of using Shale to load plugins in your app"><meta name=keywords content="Documentation,Hugo,Hugo Theme,Bootstrap"><meta name=author content="Colin Wilson - Lotus Labs"><meta name=email content="support@aigis.uk"><meta name=website content="https://lotusdocs.dev"><meta name=Version content="v0.1.0"><link rel=icon href=../../favicon.ico sizes=any><link rel=icon type=image/svg+xml href=../../favicon.svg><link rel=apple-touch-icon sizes=180x180 href=../../apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=../../favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=../../favicon-16x16.png><link rel=manifest crossorigin=use-credentials href=../../site.webmanifest><meta property="og:title" content="Walkthrough"><meta property="og:description" content="Detailed walkthrough of using Shale to load plugins in your app"><meta property="og:type" content="article"><meta property="og:url" content="/docs/walkthrough/"><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_10463312273417449664.png"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-03-04T02:17:43+10:00"><meta property="article:modified_time" content="2024-03-04T02:17:43+10:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_10463312273417449664.png"><meta name=twitter:title content="Walkthrough"><meta name=twitter:description content="Detailed walkthrough of using Shale to load plugins in your app"><script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script><script type=text/javascript src=../../docs/js/flexsearch.bundle.min.70b92c4c5202c26b45d7aa43e130e8440032cac751b9b9206ddba2052699286ac95beb01bb7f975514cc694a019a03c8.js integrity=sha384-cLksTFICwmtF16pD4TDoRAAyysdRubkgbduiBSaZKGrJW+sBu3+XVRTMaUoBmgPI crossorigin=anonymous></script><link rel=preconnect href=https://fonts.gstatic.com/><link rel=preconnect href=https://fonts.gstatic.com/ crossorigin><link href="https://fonts.googleapis.com/css?family=Inter:300,400,600,700|Fira+Code:500,700&display=block" rel=stylesheet><link rel=stylesheet href=../../docs/scss/style.min.16aa7c5d3b56a125df02e99ee767e8a59480dcbae2f2598c8ab1667d1497c633b9f921e0cde823b786d8943b1eea0dc5.css integrity=sha384-Fqp8XTtWoSXfAume52fopZSA3Lri8lmMirFmfRSXxjO5+SHgzegjt4bYlDse6g3F crossorigin=anonymous></head><body><div class=content><div class="page-wrapper toggled"><nav id=sidebar class=sidebar-wrapper><div class=sidebar-brand><a href=../../ aria-label=HomePage alt=HomePage><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></a></div><div class=sidebar-content style="height:calc(100% - 131px)"><ul class=sidebar-menu><li><a class=sidebar-root-link href=../../docs/introduction/><i class="material-icons me-2">circle</i>
+Introduction</a></li><li><a class=sidebar-root-link href=../../docs/quickstart/><i class="material-icons me-2">rocket_launch</i>
+Quickstart</a></li><li class=current><a class=sidebar-root-link href=../../docs/walkthrough/><i class="material-icons me-2">developer_guide</i>
+Walkthrough</a></li></ul></div><ul class="sidebar-footer list-unstyled mb-0"></ul></nav><main class="page-content bg-transparent"><div id=top-header class="top-header d-print-none"><div class="header-bar d-flex justify-content-between"><div class="d-flex align-items-center"><a href=../../ class="logo-icon me-3" aria-label=HomePage alt=HomePage><div class=small><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div><div class=big><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div></a><button id=close-sidebar class="btn btn-icon btn-soft">
+<span class="material-icons size-20 menu-icon align-middle">menu</span>
+</button>
+<button id=flexsearch-button class="ms-3 btn btn-soft" data-bs-toggle=collapse data-bs-target=#FlexSearchCollapse aria-expanded=false aria-controls=FlexSearchCollapse>
+<span class="material-icons size-20 menu-icon align-middle">search</span>
+<span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span><div class="d-none d-sm-block"><span class=flexsearch-button-keys><kbd class=flexsearch-button-cmd-key><svg width="44" height="15"><path d="M2.118 11.5A1.519 1.519.0 011 11.042 1.583 1.583.0 011 8.815a1.519 1.519.0 011.113-.458h.715V6.643h-.71A1.519 1.519.0 011 6.185 1.519 1.519.0 01.547 5.071 1.519 1.519.0 011 3.958 1.519 1.519.0 012.118 3.5a1.519 1.519.0 011.114.458A1.519 1.519.0 013.69 5.071v.715H5.4V5.071A1.564 1.564.0 016.976 3.5 1.564 1.564.0 018.547 5.071 1.564 1.564.0 016.976 6.643H6.261V8.357h.715a1.575 1.575.0 011.113 2.685 1.583 1.583.0 01-2.227.0A1.519 1.519.0 015.4 9.929V9.214H3.69v.715a1.519 1.519.0 01-.458 1.113A1.519 1.519.0 012.118 11.5zm0-.857a.714.714.0 00.715-.714V9.214H2.118a.715.715.0 100 1.429zm4.858.0a.715.715.0 100-1.429H6.261v.715a.714.714.0 00.715.714zM3.69 8.357H5.4V6.643H3.69zM2.118 5.786h.715V5.071a.714.714.0 00-.715-.714.715.715.0 00-.5 1.22A.686.686.0 002.118 5.786zm4.143.0h.715a.715.715.0 00.5-1.22.715.715.0 00-1.22.5z" fill="currentcolor"/><path d="M12.4 11.475H11.344l3.879-7.95h1.056z" fill="currentcolor"/><path d="M25.073 5.384l-.864.576a2.121 2.121.0 00-1.786-.923 2.207 2.207.0 00-2.266 2.326 2.206 2.206.0 002.266 2.325 2.1 2.1.0 001.782-.918l.84.617a3.108 3.108.0 01-2.622 1.293 3.217 3.217.0 01-3.349-3.317 3.217 3.217.0 013.349-3.317A3.046 3.046.0 0125.073 5.384z" fill="currentcolor"/><path d="M30.993 5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172z" fill="currentcolor"/><path d="M34.67 4.164c1.471.0 2.266.658 2.266 1.851.0 1.087-.832 1.809-2.134 1.855l2.107 2.691h-1.28L33.591 7.87H33.07v2.691H32.038v-6.4zm-1.6.969v1.8h1.572c.832.0 1.22-.3 1.22-.918s-.411-.882-1.22-.882z" fill="currentcolor"/><path d="M42.883 10.561H38.31v-6.4h1.033V9.583h3.54z" fill="currentcolor"/></svg>
+</kbd><kbd class=flexsearch-button-key><svg width="15" height="15"><path d="M5.926 12.279H4.41L9.073 2.721H10.59z" fill="currentcolor"/></svg></kbd></span></div></button></div><div class="d-flex align-items-center"><ul class="list-unstyled mb-0"><li class="list-inline-item mb-0"><a href=https://github.com/agc93/shale alt=github rel="noopener noreferrer" target=_blank><div class="btn btn-icon btn-default border-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>GitHub</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></div></a></li></ul><button id=mode class="btn btn-icon btn-default ms-2" type=button aria-label="Toggle user interface mode">
+<span class=toggle-dark><svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 48 48" fill="currentcolor"><title>Enable dark mode</title><path d="M24 42q-7.5.0-12.75-5.25T6 24t5.25-12.75T24 6q.4.0.85.025.45.025 1.15.075-1.8 1.6-2.8 3.95t-1 4.95q0 4.5 3.15 7.65Q28.5 25.8 33 25.8q2.6.0 4.95-.925T41.9 22.3q.05.6.075.975Q42 23.65 42 24q0 7.5-5.25 12.75T24 42zm0-3q5.45.0 9.5-3.375t5.05-7.925q-1.25.55-2.675.825Q34.45 28.8 33 28.8q-5.75.0-9.775-4.025T19.2 15q0-1.2.25-2.575t.9-3.125q-4.9 1.35-8.125 5.475Q9 18.9 9 24q0 6.25 4.375 10.625T24 39zm-.2-14.85z"/></svg>
+</span><span class=toggle-light><svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 48 48" fill="currentcolor"><title>Enable light mode</title><path d="M24 31q2.9.0 4.95-2.05T31 24t-2.05-4.95T24 17t-4.95 2.05T17 24t2.05 4.95T24 31zm0 3q-4.15.0-7.075-2.925T14 24t2.925-7.075T24 14t7.075 2.925T34 24t-2.925 7.075T24 34zM3.5 25.5q-.65.0-1.075-.425Q2 24.65 2 24t.425-1.075Q2.85 22.5 3.5 22.5h5q.65.0 1.075.425Q10 23.35 10 24t-.425 1.075T8.5 25.5zm36 0q-.65.0-1.075-.425Q38 24.65 38 24t.425-1.075T39.5 22.5h5q.65.0 1.075.425Q46 23.35 46 24t-.425 1.075-1.075.425zM24 10q-.65.0-1.075-.425Q22.5 9.15 22.5 8.5v-5q0-.65.425-1.075Q23.35 2 24 2t1.075.425T25.5 3.5v5q0 .65-.425 1.075Q24.65 10 24 10zm0 36q-.65.0-1.075-.425T22.5 44.5v-5q0-.65.425-1.075Q23.35 38 24 38t1.075.425.425 1.075v5q0 .65-.425 1.075Q24.65 46 24 46zM12 14.1l-2.85-2.8q-.45-.45-.425-1.075.025-.625.425-1.075.45-.45 1.075-.45t1.075.45L14.1 12q.4.45.4 1.05.0.6-.4 1-.4.45-1.025.45T12 14.1zm24.7 24.75L33.9 36q-.4-.45-.4-1.075t.45-1.025q.4-.45 1-.45t1.05.45l2.85 2.8q.45.45.425 1.075-.025.625-.425 1.075-.45.45-1.075.45t-1.075-.45zM33.9 14.1q-.45-.45-.45-1.05.0-.6.45-1.05l2.8-2.85q.45-.45 1.075-.425.625.025 1.075.425.45.45.45 1.075t-.45 1.075L36 14.1q-.4.4-1.025.4t-1.075-.4zM9.15 38.85q-.45-.45-.45-1.075t.45-1.075L12 33.9q.45-.45 1.05-.45.6.0 1.05.45.45.45.45 1.05.0.6-.45 1.05l-2.8 2.85q-.45.45-1.075.425-.625-.025-1.075-.425zM24 24z"/></svg></span></button></div></div><div class=collapse id=FlexSearchCollapse><div class=flexsearch-container><div class=flexsearch-keymap><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8m3-3-3 3-3-3"/></g></svg></kbd>
+<kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8m3 3-3-3-3 3"/></g></svg></kbd>
+<span class=flexsearch-key-label>to navigate</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4m3 3-3-3 3-3"/></g></svg></kbd>
+<span class=flexsearch-key-label>to select</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993.0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016s1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5s-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864.0 1.6425 1.031 1.5443 2.2492h-2.956"/></g></svg></kbd>
+<span class=flexsearch-key-label>to close</span></li></div><form class="flexsearch position-relative flex-grow-1 ms-2 me-2"><div class="d-flex flex-row"><input id=flexsearch class=form-control type=search placeholder=Search aria-label=Search autocomplete=off>
+<button id=hideFlexsearch type=button class="ms-2 btn btn-soft">
+cancel</button></div><div id=suggestions class="shadow rounded-1 d-none"></div></form></div></div></div><div class=container-fluid><div class=layout-spacing><div class="d-md-flex justify-content-between align-items-center"><nav aria-label=breadcrumb class="d-inline-block pb-2 mt-1 mt-sm-0"><ul id=breadcrumbs class="breadcrumb bg-transparent mb-0" itemscope itemtype=https://schema.org/BreadcrumbList><li class="breadcrumb-item text-capitalize active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=../../docs/><i class="material-icons size-20 align-text-bottom" itemprop=name>Home</i>
+</a><meta itemprop=position content='1'></li><li class="breadcrumb-item text-capitalize active" itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Walkthrough</span>
+<meta itemprop=position content='2'></li></ul></nav></div><div class="row flex-xl-nowrap"><div class="docs-toc col-xl-3 d-xl-block"><toc><div class="fw-bold text-uppercase mb-2">On this page</div><nav id=toc><ul><li><a href=#prepare-your-projects>Prepare your projects</a><ul><li><a href=#install-the-packages>Install the package(s)</a></li></ul></li><li><a href=#sample-plugin-functionality>Sample Plugin Functionality</a></li><li><a href=#loading-plugins>Loading Plugins</a><ul><li><a href=#default-conventions>Default conventions</a></li></ul></li><li><a href=#configure-plugins>Configure plugins</a><ul><li><a href=#directly-load-types>Directly load types</a></li><li><a href=#using-a-plugin-type>Using a plugin type</a></li></ul></li><li><a href=#using-plugins-from-your-host>Using plugins from your host</a></li><li><a href=#replacing-host-services-from-your-plugins>Replacing host services from your plugins</a></li><li><a href=#customizing-plugin-loading>Customizing plugin loading</a></li><li><a href=#checkpoint>Checkpoint</a></li><li><a href=#creating-a-plugin>Creating a plugin</a><ul><li><a href=#create-a-new-class-library>Create a new class library</a></li><li><a href=#add-references>Add References</a></li><li><a href=#add-our-implementations>Add our implementations</a></li><li><a href=#build-and-copy-the-plugin>Build and copy the plugin</a></li></ul></li><li><a href=#wrap-up>Wrap-up</a><ul><li><a href=#sample>Sample</a></li></ul></li></ul></nav></toc></div><div class="docs-toc-mobile d-print-none d-xl-none"><button id=toc-dropdown-btn class="btn-secondary dropdown-toggle" type=button data-bs-toggle=dropdown data-bs-offset=0,0 aria-expanded=false>
+Table of Contents</button><nav id=toc-mobile><ul class=dropdown-menu><li><a href=#prepare-your-projects>Prepare your projects</a><ul><li><a href=#install-the-packages>Install the package(s)</a></li></ul></li><li><a href=#sample-plugin-functionality>Sample Plugin Functionality</a></li><li><a href=#loading-plugins>Loading Plugins</a><ul><li><a href=#default-conventions>Default conventions</a></li></ul></li><li><a href=#configure-plugins>Configure plugins</a><ul><li><a href=#directly-load-types>Directly load types</a></li><li><a href=#using-a-plugin-type>Using a plugin type</a></li></ul></li><li><a href=#using-plugins-from-your-host>Using plugins from your host</a></li><li><a href=#replacing-host-services-from-your-plugins>Replacing host services from your plugins</a></li><li><a href=#customizing-plugin-loading>Customizing plugin loading</a></li><li><a href=#checkpoint>Checkpoint</a></li><li><a href=#creating-a-plugin>Creating a plugin</a><ul><li><a href=#create-a-new-class-library>Create a new class library</a></li><li><a href=#add-references>Add References</a></li><li><a href=#add-our-implementations>Add our implementations</a></li><li><a href=#build-and-copy-the-plugin>Build and copy the plugin</a></li></ul></li><li><a href=#wrap-up>Wrap-up</a><ul><li><a href=#sample>Sample</a></li></ul></li></ul></nav></div><div class="docs-content col-12 col-xl-9 mt-0"><div class="mb-0 d-flex"><i class="material-icons title-icon me-2">developer_guide</i><h1 class="content-title mb-0">Walkthrough</h1></div><p class="lead mb-3">Detailed walkthrough of using Shale to load plugins in your app</p><div id=content class=main-content data-bs-spy=scroll data-bs-root-margin="0px 0px -65%" data-bs-target=#toc-mobile><div data-prismjs-copy data-prismjs-copy-success data-prismjs-copy-error><p>To properly demonstrate the capabilities of Shale, we&rsquo;ll do a start-to-finish walkthrough of adding plugin support
+to a .NET application using Shale. So if this seems daunting, just remember you might not need all of these steps,
+but if you&rsquo;re new to supporting plugins in your apps, you might find my method useful.</p><p>If you&rsquo;re going to be distributing an app (let&rsquo;s call it <code>HostApp</code>) and want consumers to be able to install plugins
+built by someone other than yourself, you&rsquo;re going to want to make it easy to both <strong>build</strong> and <strong>use</strong> plugins.
+This is going to require a little extra up-front work but I promise it will be pretty intuitive once you try it out.</p><h2 id=prepare-your-projects>Prepare your projects <a href=#prepare-your-projects class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>For example, let&rsquo;s imagine you have a .NET app called <code>HostApp</code> that we want to load plugins into. For this guide, we&rsquo;ll use a console app, but it could be almost any .NET app type.</p><p>When we publish our app, we wouldn&rsquo;t want every plugin to have to reference our console app directly, since that would make building plugins way more cumbersome than necessary. Instead, we could split out the parts that our plugin authors would need into a <code>HostApp.Common</code> library. Doing that also means we could bring in Shale pretty easily without requiring plugin authors to bring too much into their projects.</p><pre class=mermaid>classDiagram
+class HostApp_Common[&#34;HostApp.Common&#34;]
+note for PluginClassLibrary &#34;Consumers won&#39;t need to reference your host app (or Shale!)&#34;
+HostApp --&gt; HostApp_Common : ProjectReference
+PluginClassLibrary --&gt; HostApp_Common : PackageReference
+</pre><div class="alert alert-info d-flex" role=alert><div class="flex-shrink-1 alert-icon">💡</div><div class=w-100>The rest of this guide assumes a project setup similar to the above, but you should be able to adapt the steps pretty easily if your project has a different structure</div></div><h3 id=install-the-packages>Install the package(s) <a href=#install-the-packages class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>Shale is provided as two packages to minimise the dependencies needed for your app&rsquo;s plugin authors: <code>Shale</code> and <code>Shale.Abstractions</code>. Like the <code>Microsoft.Extensions.*</code> packages, the <code>.Abstractions</code> package contains only the required interfaces (<code>IPlugin</code> in this case) and references to the dependent interfaces (like <code>IServiceCollection</code> and <code>IConfiguration</code>).</p><div class="alert alert-success d-flex" role=alert><div class="flex-shrink-1 alert-icon">💡</div><div class=w-100>The <code>Shale</code> package already references the <code>Abstractions</code> package so you can ignore the distinction completely if you don&rsquo;t expect plugins to be built outside of your solution</div></div><p>So, to use this with our example project set up:</p><ul><li>We would install <code>Shale.Abstractions</code> into our <code>HostApp.Common</code> project<ul><li>Since this is the one plugin authors will be building with, and they need the interfaces etc</li></ul></li><li>We would install <code>Shale</code> into our <code>HostApp</code> project<ul><li>Since the <code>HostApp</code> will be responsible for actually loading the plugins, resolving from DI, etc</li></ul></li></ul><p>If you prefer a visual diagram, check out below, but if that seems daunting, don&rsquo;t be scared, it&rsquo;s not really that complicated.</p><pre class=mermaid>classDiagram
+class HostApp_Common[&#34;HostApp.Common&#34;]
+class ShaleAbs[&#34;Shale.Abstractions&#34;]
+note for PluginClassLibrary &#34;Consumers don&#39;t need to reference Shale&#34;
+HostApp --&gt; Shale : PackageReference
+HostApp --&gt; HostApp_Common : ProjectReference
+HostApp_Common --&gt; ShaleAbs : PackageReference
+PluginClassLibrary --&gt; HostApp_Common : PackageReference
+</pre><div class="alert alert-default d-flex" role=alert><div class="flex-shrink-1 alert-icon">ℹ</div><div class=w-100>In general, your host application will need to reference <code>Shale</code> (to actually load the plugins) and whatever assembly your plugins will reference will need to reference <code>Shale.Abstractions</code>.</div></div><h2 id=sample-plugin-functionality>Sample Plugin Functionality <a href=#sample-plugin-functionality class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>So let&rsquo;s use the classic &ldquo;Hello, World&rdquo; example for our app, but offload the actual &ldquo;Hello&rdquo; part to plugins! So in our <code>HostApp.Common</code> library, let&rsquo;s add an <code>IGreeter</code> interface:</p><div class=prism-codeblock><pre id=66ab734 class=language-csharp>
+  <code>public interface IGreeter {
+	string Greet(string name);
+}</code>
+  </pre></div><p>We&rsquo;ll loop back to using this interface later on.</p><h2 id=loading-plugins>Loading Plugins <a href=#loading-plugins class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>Assuming your .NET app uses the <code>Microsoft.Extensions.DependencyInjection</code> APIs, you likely already have an <code>IServicesCollection</code> object in your startup, but if you don&rsquo;t already, you&rsquo;ll need to create one.</p><p>For example, if I&rsquo;m putting together a command-line app using <a href=https://spectreconsole.net/cli/ rel=external target=_blank><code>Spectre.Console.Cli</code><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M14 5c-.552.0-1-.448-1-1s.448-1 1-1h6c.552.0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1V6.414l-7.293 7.293c-.391.39-1.024.39-1.414.0-.391-.391-.391-1.024.0-1.414L17.586 5H14zM5 7c-.552.0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552.0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1V19c0 1.657-1.343 3-3 3H5c-1.657.0-3-1.343-3-3V8c0-1.657 1.343-3 3-3h4.563c.552.0 1 .448 1 1s-.448 1-1 1H5z"/></svg></a>, I can add DI using the <a href=https://github.com/WCOMAB/Spectre.Console.Cli.Extensions.DependencyInjection rel=external target=_blank><code>Spectre.Console.Cli.Extensions.DependencyInjection</code><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M14 5c-.552.0-1-.448-1-1s.448-1 1-1h6c.552.0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1V6.414l-7.293 7.293c-.391.39-1.024.39-1.414.0-.391-.391-.391-1.024.0-1.414L17.586 5H14zM5 7c-.552.0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552.0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1V19c0 1.657-1.343 3-3 3H5c-1.657.0-3-1.343-3-3V8c0-1.657 1.343-3 3-3h4.563c.552.0 1 .448 1 1s-.448 1-1 1H5z"/></svg></a> package with code like below:</p><div class=prism-codeblock><pre id=ab4d212 class=language-csharp>
+  <code>var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+var app = new CommandApp(new Spectre.Console.Cli.Extensions.DependencyInjection.DependencyInjectionRegistrar(services));
+app.Configure(c =&gt; {
+	c.SetApplicationName(&#34;Sample Host App&#34;);
+	c.AddCommand&lt;GreetingCommand&gt;(&#34;greet&#34;);
+});
+return app.Run(args);</code>
+  </pre></div><p>From there, we just need to add one line to start loading plugins using the default conventions:</p><div class=prism-codeblock><pre id=df56a7d class=language-csharp>
+  <code>var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+services.AddPlugins(); // &lt;-- This is where Shale comes in
+var app = new CommandApp(new Spectre.Console.Cli.Extensions.DependencyInjection.DependencyInjectionRegistrar(services));
+app.Configure(c =&gt; {
+	c.SetApplicationName(&#34;Sample Host App&#34;);
+	c.AddCommand&lt;GreetingCommand&gt;(&#34;greet&#34;);
+});
+return app.Run(args);</code>
+  </pre></div><h3 id=default-conventions>Default conventions <a href=#default-conventions class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>This is where the &ldquo;opinionated&rdquo; part of the tagline comes into play. By default, this will look for directories in both the &ldquo;./Plugins&rdquo; directory relative to the current directory, and the &ldquo;./Plugins&rdquo; directory relative to the current executable.</p><p>Shale will attempt to load any directories in those directories that have a <code>.dll</code> file in them. For example:</p><div class=prism-codeblock><pre id=f28e3fa class=language-text>
+  <code>│   HostApp.exe
+└───Plugins
+	└───Plugin1
+	│	│   // trimmed for brevity
+	│	│   HostApp.Common.dll
+	│	│   Plugin1.dll
+	│	└───Plugin1.deps.json
+    └───Plugin2
+		│   // trimmed for brevity
+		│   HostApp.Common.dll
+		│   Plugin2.dll
+		└───Plugin2.deps.json</code>
+  </pre></div><p>When your app calls Shale, it will attempt to load two plugins: &ldquo;Plugin1&rdquo; from <code>Plugin1.dll</code> and &ldquo;Plugin2&rdquo; from <code>Plugin2.dll</code>.</p><div class="alert alert-warning d-flex" role=alert><div class="flex-shrink-1 alert-icon">⚠</div><div class=w-100>To prevent loading unrelated assemblies, the folder must be named the same as the assembly file (the <code>.dll</code>) or Shale won&rsquo;t load the plugin.</div></div><p>Now, at the moment, that&rsquo;s not very helpful because any plugins it finds there won&rsquo;t actually <em>do</em> anything. We can fix that though, so let&rsquo;s keep going&mldr;</p><h2 id=configure-plugins>Configure plugins <a href=#configure-plugins class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>Currently, Shale will discover and load any plugin assemblies in the default search paths, but the plugins are completely isolated, and we&rsquo;re not actually using anything from those plugins yet.</p><p>There&rsquo;s two ways of handling this, depending on how complex you want your plugins to be. You can mix-and-match both methods, but we&rsquo;ll start with the &ldquo;simpler&rdquo; method.</p><h3 id=directly-load-types>Directly load types <a href=#directly-load-types class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>So we know that we want to load an <code>IGreeter</code> implementation (from <a href=../../docs/walkthrough/#sample-plugin-functionality>above</a>) from a plugin, so let&rsquo;s show how to just quickly pull any <code>IGreeter</code> implementations out of any plugins we find. Just update the call to <code>AddPlugins</code> using the fluent API:</p><div class=prism-codeblock><pre id=6a316a3 class=language-csharp>
+  <code>services.AddPlugins&lt;IPlugin&gt;(c =&gt; c.AlwaysLoad&lt;IGreeter&gt;());</code>
+  </pre></div><p>This tells Shale you want to always load <strong><em>any</em></strong> <code>IGreeter</code> implementation from any plugins it discovers. Any time it finds a type that can be assigned to <code>IGreeter</code> it will add it to the DI container as an implementation of <code>IGreeter</code>.</p><p>Using this method, plugins don&rsquo;t even need to include any additional code, attributes, or markers.</p><h3 id=using-a-plugin-type>Using a plugin type <a href=#using-a-plugin-type class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>Alternatively, plugin authors can implement a specific interface to get a bit more control over how their plugins are loaded.</p><p>Shale includes an <code>IPlugin</code> interface that you can use out of the box if you don&rsquo;t have any domain-specific logic to add. Alternatively, if you have extra requirements, or just want to keep Shale abstracted away for authors, you can use your own plugin type inheriting from <code>IPlugin</code>.</p><div class=prism-codeblock><pre id=cde9b4f class=language-csharp>
+  <code>public interface IAppPlugin : IPlugin {}</code>
+  </pre></div><div class=prism-codeblock><pre id=0563432 class=language-csharp>
+  <code>services.AddPlugins&lt;IAppPlugin&gt;();</code>
+  </pre></div><p>Whether you use your own <code>IPlugin</code> implementation or Shale&rsquo;s, the plugin interface includes one method: <code>ConfigureServices(IServiceCollection services, IConfiguration? config = null)</code>. Plugins can use this method to register services with the DI container, but we&rsquo;ll get into more detail about that <a href=../../docs/walkthrough/#replacing-host-services-from-your-plugins>in a bit</a>.</p><p>When Shale finds an implementation of the plugin type specified in the call to <code>AddPlugins</code> (or <code>IPlugin</code> if you don&rsquo;t specify your own type), Shale will automatically load that type from the plugin assembly and (near the end of the loading process) automatically call the <code>ConfigureServices</code> method for each plugin.</p><div class="alert alert-info d-flex" role=alert><div class="flex-shrink-1 alert-icon">💡</div><div class=w-100>Shale actually resolves the plugin type from a (per-plugin) DI container, so plugin types can use constructor injection if they need a service from the host</div></div><h4 id=type-sharing>Type sharing <a href=#type-sharing class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h4><p>Now this is going to get a bit confusing but, in my experience, you might never need to cover it. By default, when plugins are loaded (by <code>DotNetCorePlugins</code>), they are loaded into their own isolated &ldquo;context&rdquo; which means types are not shared from the host to the plugin or vice-versa.</p><p>Shale, by default, slightly tweaks this by sharing some types with plugins: <code>IServiceCollection</code>, <code>ILogger</code>, <code>IConfiguration</code> and any types you specify with <code>AlwaysLoad</code>. If, however, you want your plugins to share (in either direction) any other types with the host, you can add them with the fluent API:</p><div class=prism-codeblock><pre id=b2de346 class=language-csharp>
+  <code>services.AddPlugins&lt;IAppPlugin&gt;(c =&gt; c.ShareTypes(typeof(GlobalOptions)));</code>
+  </pre></div><p>or enable type sharing for all types with:</p><div class=prism-codeblock><pre id=b92f1ea class=language-csharp>
+  <code>services.AddPlugins&lt;IAppPlugin&gt;(c =&gt; c.ShareAllTypes());</code>
+  </pre></div><blockquote><p>You can find more information on what type sharing is and when you might need it in <a href=https://github.com/natemcmaster/DotNetCorePlugins/blob/main/docs/what-are-shared-types.md rel=external target=_blank>this excellent explainer<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M14 5c-.552.0-1-.448-1-1s.448-1 1-1h6c.552.0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1V6.414l-7.293 7.293c-.391.39-1.024.39-1.414.0-.391-.391-.391-1.024.0-1.414L17.586 5H14zM5 7c-.552.0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552.0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1V19c0 1.657-1.343 3-3 3H5c-1.657.0-3-1.343-3-3V8c0-1.657 1.343-3 3-3h4.563c.552.0 1 .448 1 1s-.448 1-1 1H5z"/></svg></a> from the <code>DotNetCorePlugins</code> project itself.</p></blockquote><h2 id=using-plugins-from-your-host>Using plugins from your host <a href=#using-plugins-from-your-host class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>At this point, we have our host app (<code>HostApp</code>) loading any plugins it finds in the <code>Plugins</code> directory, automatically registering any <code>IGreeter</code> implementations it finds. Now that we&rsquo;ve done that, let&rsquo;s actually use our plugins.</p><p>To get a greeter (from your plugins), just resolve the service from the DI container like usual:</p><div class=prism-codeblock><pre id=07f9852 class=language-csharp>
+  <code>// to get the last registered implementation
+var greeter = services.BuildServiceProvider().GetService&lt;IGreeter&gt;();
+// or all of them at once
+var greeters = services.BuildServiceProvider().GetServices&lt;IGreeter&gt;();</code>
+  </pre></div><p>Since we&rsquo;re just using the standard Microsoft DI container logic, you can even use features like constructor injection if your app environment supports it.</p><h2 id=replacing-host-services-from-your-plugins>Replacing host services from your plugins <a href=#replacing-host-services-from-your-plugins class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>If your plugins are using <a href=../../docs/walkthrough/#using-a-plugin-type>plugin types</a>, plugins can also &ldquo;override&rdquo; services from the host with their own implementation. Then, in your host, when you resolve a service from the DI container, you&rsquo;ll get the plugin&rsquo;s implementation of that service.</p><div class=prism-codeblock><pre id=265e715 class=language-csharp>
+  <code>public class OutputWriterPlugin : IAppPlugin {
+	public IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration? config) {
+		services.AddSingleton&lt;IOutputWriter, CustomConsoleWriter&gt;();
+		return services;
+	}
+}</code>
+  </pre></div><h2 id=customizing-plugin-loading>Customizing plugin loading <a href=#customizing-plugin-loading class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>We&rsquo;ve seen what the Shale API looks like for tweaking how plugins are loaded and used in your app, but it&rsquo;s also very easy to customize where Shale finds your plugins.</p><p>The easiest way is to add new paths to Shale&rsquo;s &ldquo;search paths&rdquo;. These are paths that Shale then looks through (using the usual one-folder-per-plugin method) for plugins to load. You can easily add paths using the <code>AddSearchPath</code> fluent API:</p><div class=prism-codeblock><pre id=e526b09 class=language-csharp>
+  <code>var modulesPath = Path.Join(Environment.CurrentDirectory, &#34;Modules&#34;);
+services.AddPlugins&lt;IAppPlugin&gt;(c =&gt; c.AddSearchPath(modulesPath));</code>
+  </pre></div><p>This will add a new path that Shale will search using the <a href=../../docs/walkthrough/#default-conventions>default conventions</a> to find plugins.</p><div class="alert alert-warning d-flex" role=alert><div class="flex-shrink-1 alert-icon">❗</div><div class=w-100>In the future, we want to provide more methods of discovering and loading plugins but for now, Shale only supports the one &lsquo;convention&rsquo; for discovering plugins in a path.</div></div><div class="alert alert-info d-flex" role=alert><div class="flex-shrink-1 alert-icon">💡</div><div class=w-100>Shale also supports further controlling plugin loading behaviour using APIs like the <code>RunOnLoad</code> and <code>OnlyLoadIf</code> fluent APIs which can be used to conditionally load plugins, or run code during plugin loading, but this is beyond the scope of this walkthrough.</div></div><h2 id=checkpoint>Checkpoint <a href=#checkpoint class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>At this point if you&rsquo;ve followed along, we have a host app (<code>HostApp</code>) that&rsquo;s set up to load any plugins from a <em>Plugins/</em> directory, register any <code>IGreeter</code> implementations and let those plugins register their own services (in an <code>IAppPlugin</code> implementation).</p><p>This only takes a couple of lines of code in your app, then Shale will do the discovery and configuration, handing off to <code>DotNetCorePlugins</code> for the actual plugin loading.</p><p>Next, we&rsquo;re going to look at how to actually author a plugin that our app can load!</p><h2 id=creating-a-plugin>Creating a plugin <a href=#creating-a-plugin class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>To create a plugin (<code>PluginClassLibrary</code> from the diagrams in <a href=../../docs/walkthrough/#prepare-your-projects>our example projects</a>), we just need to follow a few steps:</p><ul><li>Create a new class library</li><li>Reference our Common/Abstractions/etc library</li><li>Add our implementations</li><li>Copy/publish it to the right place</li></ul><h3 id=create-a-new-class-library>Create a new class library <a href=#create-a-new-class-library class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>This should be pretty straightforward most of the time. For example:</p><div class=prism-codeblock><pre id=7fd2145 class=language-powershell>
+  <code>dotnet new classlib</code>
+  </pre></div><h3 id=add-references>Add References <a href=#add-references class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>If you&rsquo;re creating a plugin inside your own solution and/or codebase, you can just add a reference to the project that includes the interfaces plugins will need access to (<code>HostApp.Common</code> in our examples):</p><div class=prism-codeblock><pre id=f046090 class=language-powershell>
+  <code>dotnet add reference ../HostApp.Common/HostApp.Common.csproj</code>
+  </pre></div><p>But if you want authors to be able to create and distribute plugins from outside your own codebase, you might want to publish a NuGet package with the abstractions that plugins need to use. This is where splitting out abstractions into their own project can help (<a href=../../docs/walkthrough/#prepare-your-projects>as discussed here</a>). If you&rsquo;ve done that, authors should instead install your package:</p><div class=prism-codeblock><pre id=a77d99d class=language-powershell>
+  <code># This is an example only!
+dotnet add package HostApp.Common</code>
+  </pre></div><h3 id=add-our-implementations>Add our implementations <a href=#add-our-implementations class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>In this example, that starts with an implementation of <code>IGreeter</code>:</p><div class=prism-codeblock><pre id=81690d6 class=language-csharp>
+  <code>public class Greeter(GlobalOptions options, IOutputWriter writer) : IGreeter {
+	public string Greet(string name) {
+		if (options.Verbose) { //the plugin doesn&#39;t need to know where this value is coming from!
+			writer.Write(&#34;You are running in verbose mode!&#34;); 
+		}
+		return $&#34;Hello {name} from an external plugin!&#34;;
+	}
+}</code>
+  </pre></div><p>If we want our plugin to do anything else, we could use a <a href=../../docs/walkthrough/#using-a-plugin-type>plugin type</a> to register some services:</p><div class=prism-codeblock><pre id=187ff6b class=language-csharp>
+  <code>// we&#39;re not including the implementation of `PrefixedConsoleWriter` here, but you get the idea!
+public class OutputWriterPlugin : IAppPlugin {
+	public IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration? config) {
+		services.AddSingleton&lt;IOutputWriter, PrefixedConsoleWriter&gt;();
+		return services;
+	}
+}</code>
+  </pre></div><p>At this point, that&rsquo;s all the code we need: we&rsquo;ve added an <code>IGreeter</code> implementation and we&rsquo;ve even added our optional plugin type.</p><h3 id=build-and-copy-the-plugin>Build and copy the plugin <a href=#build-and-copy-the-plugin class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>Now we just need to build the plugin into a directory we can drop into our <em>Plugins/</em> directory. For example, from our plugin class library folder:</p><div class=prism-codeblock><pre id=5981933 class=language-powershell>
+  <code>dotnet build -o PluginClassLibrary/</code>
+  </pre></div><div class="alert alert-warning d-flex" role=alert><div class="flex-shrink-1 alert-icon">⚠</div><div class=w-100>Remember that the folder must be named the same as the assembly file (the <code>.dll</code>) or Shale won&rsquo;t load the plugin.</div></div><p>You should then end up with a directory called <code>PluginClassLibrary</code> with our compiled plugin in it. Once you&rsquo;ve built or published your <code>HostApp</code>, just open the folder (wherever the executable ends up), create a folder named &ldquo;Plugins&rdquo; and copy your newly created &ldquo;PluginClassLibrary&rdquo; folder into it. The next time you run <code>HostApp.exe</code>/<code>HostApp</code>, it will automatically discover and load the services from your plugin at startup!</p><h2 id=wrap-up>Wrap-up <a href=#wrap-up class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>That&rsquo;s it! Now that might have seemed like a lot, but we&rsquo;ve gone into quite a bit of detail here. There&rsquo;s not actually that much to it!</p><p>Set up your projects, add the Shale packages as necessary, set up your DI container, add your call to <code>AddPlugins</code> and put your compiled plugins in the &ldquo;Plugins&rdquo; directory.</p><h3 id=sample>Sample <a href=#sample class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>Now if you made it this far, here&rsquo;s a bonus: there&rsquo;s an entire sample project recreating this whole walkthrough!</p><p>If you check the <code>samples</code> directory of <a href=https://github.com/agc93/shale rel=external target=_blank>the repository<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M14 5c-.552.0-1-.448-1-1s.448-1 1-1h6c.552.0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1V6.414l-7.293 7.293c-.391.39-1.024.39-1.414.0-.391-.391-.391-1.024.0-1.414L17.586 5H14zM5 7c-.552.0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552.0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1V19c0 1.657-1.343 3-3 3H5c-1.657.0-3-1.343-3-3V8c0-1.657 1.343-3 3-3h4.563c.552.0 1 .448 1 1s-.448 1-1 1H5z"/></svg></a>, you&rsquo;ll find a sample project of both the host app (in the <code>host</code> folder) and a simple plugin (in the <code>plugin</code> folder). This is a complete ready-to-run sample!</p><p>You can run the host app using <code>dotnet run</code> (or from your IDE) to see how it works without any plugins, then jump over to the <code>plugin/</code> folder, and build in Release mode (i.e. <code>dotnet build -c Release</code>) to build the plugin straight into the right folder for the host app to find. Run the host app again and you&rsquo;ll see it load the plugin and how the behaviour changes.</p><p>The sample app uses Spectre.Console.Cli, Spectre.Console.Cli.Extensions.DependencyInjection and Shale to demonstrate loading plugins for a simple CLI application.</p></div><script src=../../docs/js/mermaid.min.a4a583544e57b0ee421947966ee3a1ece84217be936d80e4ebb1ab6e798219816de5512403f79735bfef34e4d955e6cd.js integrity=sha384-pKWDVE5XsO5CGUeWbuOh7OhCF76TbYDk67GrbnmCGYFt5VEkA/eXNb/vNOTZVebN></script><script>const config={startOnLoad:!0,logLevel:"error",align:"center",theme:"null"};mermaid.initialize(config)</script></div><div><hr class=doc-hr><div id=doc-nav class=d-print-none><div class="row flex-xl-nowrap"><div class="col-sm-6 pt-2 doc-next"><a href=../../docs/quickstart/><div class="card h-100 my-1"><div class="card-body py-2"><p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Quickstart</p><p class="card-text ms-2">Getting started with using …</p></div></div></a></div></div></div></div></div></div></div></div><footer class="shadow py-3 d-print-none"><div class=container-fluid><div class="row align-items-center"><div class=col><div class="text-sm-start text-center mx-md-2"><p class=mb-0>© 2024 agc93. Built with <a href=https://github.com/colinwilson/lotusdocs><strong>Lotus Docs</strong></a></p></div></div></div></div></footer></main></div></div><button onclick=topFunction() id=back-to-top aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12 10.224l-6.3 6.3-1.38-1.372L12 7.472l7.68 7.68-1.38 1.376z" style="fill:#fff"/></svg></button>
+<script>(()=>{var e=document.getElementById("mode");e!==null&&(window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",e=>{e.matches?(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")):(localStorage.setItem("theme","light"),document.documentElement.removeAttribute("data-dark-mode"))}),e.addEventListener("click",()=>{document.documentElement.toggleAttribute("data-dark-mode"),localStorage.setItem("theme",document.documentElement.hasAttribute("data-dark-mode")?"dark":"light")}),localStorage.getItem("theme")==="dark"?document.documentElement.setAttribute("data-dark-mode",""):document.documentElement.removeAttribute("data-dark-mode"))})()</script><script src=../../docs/js/bootstrap.c7927bdd82eceb076739257add3f4b0e11379da037c07d5c7110daeb6de0e3edcb2de867604550f88815157e4ec4ddb7.js integrity=sha384-x5J73YLs6wdnOSV63T9LDhE3naA3wH1ccRDa623g4+3LLehnYEVQ+IgVFX5OxN23 defer></script><script type=text/javascript src=../../docs/js/bundle.min.ae2b3b4bbd3e20733dfdde283932656ca1346213a123ef4d8a093eb07bc66881ea360d1194a4c8454b4bda0234e1947e.js integrity=sha384-ris7S70+IHM9/d4oOTJlbKE0YhOhI+9Nigk+sHvGaIHqNg0RlKTIRUtL2gI04ZR+ crossorigin=anonymous defer></script><script type=module>
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+
+    
+
+    index.add(
+            {
+                id:  0 ,
+                href: "\/docs\/",
+                title: "Documentation",
+                description: "Explore our guides and examples to get started with Shale.",
+                content: ""
+            }
+        );
+    index.add(
+            {
+                id:  1 ,
+                href: "\/docs\/introduction\/",
+                title: "Introduction",
+                description: "An introduction to the Shale project",
+                content: "Shale is a thin but opinionated abstraction layer over Nate McMaster’s excellent DotNetCorePlugins. That library is doing all the hard work of loading the assemblies and types, Shale just provides a slightly easier (and in my opinion, friendlier) reusable API for adding plugin support to your own applications.\nIn short, you can use Shale to quickly and easily add plugin support to your own applications with minimal code changes.\nDesign linkThe DotNetCorePlugins library is an incredibly useful library that’s perfect for dynamically loading code in .NET applications. I love it, and all the credit in the world to Nate for the library!\nSince discovering it, I have added plugin support to many applications and tools that I work on, and I noticed that I tended to create a (very similar) API wrapper around that library for each project, so here we are and that API layer is now this project.\nBasically, Shale is a very thin (and leaky) abstraction over DotNetCorePlugins with an opinionated and configurable API to make it easier to use that library for adding plugins to any .NET application. In particular, Shale is perfect for any application using a Microsoft.Extensions.DependencyInjection-compatible DI container.\nWhy “Shale” linkBecause I’m a sucker for a) weird project names, and b) cool words. Shale is a type of clay used in the construction of bricks (aka building blocks) that’s usually found in thin layers. Don’t think too hard about it.\n"
+            }
+        );
+    index.add(
+            {
+                id:  2 ,
+                href: "\/docs\/quickstart\/",
+                title: "Quickstart",
+                description: "Getting started with using Shale in your projects",
+                content: " 💡 This is a highly abridged quickstart guide! If you’re not familiar with Shale and/or DotNetCorePlugins and/or plugins in .NET applications, we strongly recommend following the "
+            }
+        );
+    index.add(
+            {
+                id:  3 ,
+                href: "\/docs\/walkthrough\/",
+                title: "Walkthrough",
+                description: "Detailed walkthrough of using Shale to load plugins in your app",
+                content: "To properly demonstrate the capabilities of Shale, we’ll do a start-to-finish walkthrough of adding plugin support to a .NET application using Shale. So if this seems daunting, just remember you might not need all of these steps, but if you’re new to supporting plugins in your apps, you might find my method useful.\nIf you’re going to be distributing an app (let’s call it HostApp) and want consumers to be able to install plugins built by someone other than yourself, you’re going to want to make it easy to both build and use plugins. This is going to require a little extra up-front work but I promise it will be pretty intuitive once you try it out.\nPrepare your projects linkFor example, let’s imagine you have a .NET app called HostApp that we want to load plugins into. For this guide, we’ll use a console app, but it could be almost any .NET app type.\nWhen we publish our app, we wouldn’t want every plugin to have to reference our console app directly, since that would make building plugins way more cumbersome than necessary. Instead, we could split out the parts that our plugin authors would need into a HostApp.Common library. Doing that also means we could bring in Shale pretty easily without requiring plugin authors to bring too much into their projects.\nclassDiagram class HostApp_Common[\"HostApp.Common\"] note for PluginClassLibrary \"Consumers won't need to reference your host app (or Shale!)\" HostApp --\u003e HostApp_Common : ProjectReference PluginClassLibrary --\u003e HostApp_Common : PackageReference 💡 The rest of this guide assumes a project setup similar to the above, but you should be able to adapt the steps pretty easily if your project has a different structure Install the package(s) linkShale is provided as two packages to minimise the dependencies needed for your app’s plugin authors: Shale and Shale.Abstractions. Like the Microsoft.Extensions.* packages, the .Abstractions package contains only the required interfaces (IPlugin in this case) and references to the dependent interfaces (like IServiceCollection and IConfiguration).\n💡 The Shale package already references the Abstractions package so you can ignore the distinction completely if you don’t expect plugins to be built outside of your solution So, to use this with our example project set up:\nWe would install Shale.Abstractions into our HostApp.Common project Since this is the one plugin authors will be building with, and they need the interfaces etc We would install Shale into our HostApp project Since the HostApp will be responsible for actually loading the plugins, resolving from DI, etc If you prefer a visual diagram, check out below, but if that seems daunting, don’t be scared, it’s not really that complicated.\nclassDiagram class HostApp_Common[\"HostApp.Common\"] class ShaleAbs[\"Shale.Abstractions\"] note for PluginClassLibrary \"Consumers don't need to reference Shale\" HostApp --\u003e Shale : PackageReference HostApp --\u003e HostApp_Common : ProjectReference HostApp_Common --\u003e ShaleAbs : PackageReference PluginClassLibrary --\u003e HostApp_Common : PackageReference ℹ In general, your host application will need to reference Shale (to actually load the plugins) and whatever assembly your plugins will reference will need to reference Shale.Abstractions. Sample Plugin Functionality linkSo let’s use the classic “Hello, World” example for our app, but offload the actual “Hello” part to plugins! So in our HostApp.Common library, let’s add an IGreeter interface:\npublic interface IGreeter { string Greet(string name); } We’ll loop back to using this interface later on.\nLoading Plugins linkAssuming your .NET app uses the Microsoft.Extensions.DependencyInjection APIs, you likely already have an IServicesCollection object in your startup, but if you don’t already, you’ll need to create one.\nFor example, if I’m putting together a command-line app using Spectre.Console.Cli, I can add DI using the Spectre.Console.Cli.Extensions.DependencyInjection package with code like below:\nvar services = new Microsoft.Extensions.DependencyInjection.ServiceCollection(); var app = new CommandApp(new Spectre.Console.Cli.Extensions.DependencyInjection.DependencyInjectionRegistrar(services)); app.Configure(c =\u003e { c.SetApplicationName(\"Sample Host App\"); c.AddCommand(\"greet\"); }); return app.Run(args); From there, we just need to add one line to start loading plugins using the default conventions:\nvar services = new Microsoft.Extensions.DependencyInjection.ServiceCollection(); services.AddPlugins(); // \u003c-- This is where Shale comes in var app = new CommandApp(new Spectre.Console.Cli.Extensions.DependencyInjection.DependencyInjectionRegistrar(services)); app.Configure(c =\u003e { c.SetApplicationName(\"Sample Host App\"); c.AddCommand(\"greet\"); }); return app.Run(args); Default conventions linkThis is where the “opinionated” part of the tagline comes into play. By default, this will look for directories in both the “./Plugins” directory relative to the current directory, and the “./Plugins” directory relative to the current executable.\nShale will attempt to load any directories in those directories that have a .dll file in them. For example:\n│ HostApp.exe └───Plugins └───Plugin1 │\t│ // trimmed for brevity │\t│ HostApp.Common.dll │\t│ Plugin1.dll │\t└───Plugin1.deps.json └───Plugin2 │ // trimmed for brevity │ HostApp.Common.dll │ Plugin2.dll └───Plugin2.deps.json When your app calls Shale, it will attempt to load two plugins: “Plugin1” from Plugin1.dll and “Plugin2” from Plugin2.dll.\n⚠ To prevent loading unrelated assemblies, the folder must be named the same as the assembly file (the .dll) or Shale won’t load the plugin. Now, at the moment, that’s not very helpful because any plugins it finds there won’t actually do anything. We can fix that though, so let’s keep going…\nConfigure plugins linkCurrently, Shale will discover and load any plugin assemblies in the default search paths, but the plugins are completely isolated, and we’re not actually using anything from those plugins yet.\nThere’s two ways of handling this, depending on how complex you want your plugins to be. You can mix-and-match both methods, but we’ll start with the “simpler” method.\nDirectly load types linkSo we know that we want to load an IGreeter implementation (from above) from a plugin, so let’s show how to just quickly pull any IGreeter implementations out of any plugins we find. Just update the call to AddPlugins using the fluent API:\nservices.AddPlugins(c =\u003e c.AlwaysLoad()); This tells Shale you want to always load any IGreeter implementation from any plugins it discovers. Any time it finds a type that can be assigned to IGreeter it will add it to the DI container as an implementation of IGreeter.\nUsing this method, plugins don’t even need to include any additional code, attributes, or markers.\nUsing a plugin type linkAlternatively, plugin authors can implement a specific interface to get a bit more control over how their plugins are loaded.\nShale includes an IPlugin interface that you can use out of the box if you don’t have any domain-specific logic to add. Alternatively, if you have extra requirements, or just want to keep Shale abstracted away for authors, you can use your own plugin type inheriting from IPlugin.\npublic interface IAppPlugin : IPlugin {} services.AddPlugins(); Whether you use your own IPlugin implementation or Shale’s, the plugin interface includes one method: ConfigureServices(IServiceCollection services, IConfiguration? config = null). Plugins can use this method to register services with the DI container, but we’ll get into more detail about that in a bit.\nWhen Shale finds an implementation of the plugin type specified in the call to AddPlugins (or IPlugin if you don’t specify your own type), Shale will automatically load that type from the plugin assembly and (near the end of the loading process) automatically call the ConfigureServices method for each plugin.\n💡 Shale actually resolves the plugin type from a (per-plugin) DI container, so plugin types can use constructor injection if they need a service from the host Type sharing linkNow this is going to get a bit confusing but, in my experience, you might never need to cover it. By default, when plugins are loaded (by DotNetCorePlugins), they are loaded into their own isolated “context” which means types are not shared from the host to the plugin or vice-versa.\nShale, by default, slightly tweaks this by sharing some types with plugins: IServiceCollection, ILogger, IConfiguration and any types you specify with AlwaysLoad. If, however, you want your plugins to share (in either direction) any other types with the host, you can add them with the fluent API:\nservices.AddPlugins(c =\u003e c.ShareTypes(typeof(GlobalOptions))); or enable type sharing for all types with:\nservices.AddPlugins(c =\u003e c.ShareAllTypes()); You can find more information on what type sharing is and when you might need it in this excellent explainer from the DotNetCorePlugins project itself.\nUsing plugins from your host linkAt this point, we have our host app (HostApp) loading any plugins it finds in the Plugins directory, automatically registering any IGreeter implementations it finds. Now that we’ve done that, let’s actually use our plugins.\nTo get a greeter (from your plugins), just resolve the service from the DI container like usual:\n// to get the last registered implementation var greeter = services.BuildServiceProvider().GetService(); // or all of them at once var greeters = services.BuildServiceProvider().GetServices(); Since we’re just using the standard Microsoft DI container logic, you can even use features like constructor injection if your app environment supports it.\nReplacing host services from your plugins linkIf your plugins are using plugin types, plugins can also “override” services from the host with their own implementation. Then, in your host, when you resolve a service from the DI container, you’ll get the plugin’s implementation of that service.\npublic class OutputWriterPlugin : IAppPlugin { public IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration? config) { services.AddSingleton(); return services; } } Customizing plugin loading linkWe’ve seen what the Shale API looks like for tweaking how plugins are loaded and used in your app, but it’s also very easy to customize where Shale finds your plugins.\nThe easiest way is to add new paths to Shale’s “search paths”. These are paths that Shale then looks through (using the usual one-folder-per-plugin method) for plugins to load. You can easily add paths using the AddSearchPath fluent API:\nvar modulesPath = Path.Join(Environment.CurrentDirectory, \"Modules\"); services.AddPlugins(c =\u003e c.AddSearchPath(modulesPath)); This will add a new path that Shale will search using the default conventions to find plugins.\n❗ In the future, we want to provide more methods of discovering and loading plugins but for now, Shale only supports the one ‘convention’ for discovering plugins in a path. 💡 Shale also supports further controlling plugin loading behaviour using APIs like the RunOnLoad and OnlyLoadIf fluent APIs which can be used to conditionally load plugins, or run code during plugin loading, but this is beyond the scope of this walkthrough. Checkpoint linkAt this point if you’ve followed along, we have a host app (HostApp) that’s set up to load any plugins from a Plugins/ directory, register any IGreeter implementations and let those plugins register their own services (in an IAppPlugin implementation).\nThis only takes a couple of lines of code in your app, then Shale will do the discovery and configuration, handing off to DotNetCorePlugins for the actual plugin loading.\nNext, we’re going to look at how to actually author a plugin that our app can load!\nCreating a plugin linkTo create a plugin (PluginClassLibrary from the diagrams in our example projects), we just need to follow a few steps:\nCreate a new class library Reference our Common/Abstractions/etc library Add our implementations Copy/publish it to the right place Create a new class library linkThis should be pretty straightforward most of the time. For example:\ndotnet new classlib Add References linkIf you’re creating a plugin inside your own solution and/or codebase, you can just add a reference to the project that includes the interfaces plugins will need access to (HostApp.Common in our examples):\ndotnet add reference ../HostApp.Common/HostApp.Common.csproj But if you want authors to be able to create and distribute plugins from outside your own codebase, you might want to publish a NuGet package with the abstractions that plugins need to use. This is where splitting out abstractions into their own project can help (as discussed here). If you’ve done that, authors should instead install your package:\n# This is an example only! dotnet add package HostApp.Common Add our implementations linkIn this example, that starts with an implementation of IGreeter:\npublic class Greeter(GlobalOptions options, IOutputWriter writer) : IGreeter { public string Greet(string name) { if (options.Verbose) { //the plugin doesn't need to know where this value is coming from! writer.Write(\"You are running in verbose mode!\"); } return $\"Hello {name} from an external plugin!\"; } } If we want our plugin to do anything else, we could use a plugin type to register some services:\n// we're not including the implementation of `PrefixedConsoleWriter` here, but you get the idea! public class OutputWriterPlugin : IAppPlugin { public IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration? config) { services.AddSingleton(); return services; } } At this point, that’s all the code we need: we’ve added an IGreeter implementation and we’ve even added our optional plugin type.\nBuild and copy the plugin linkNow we just need to build the plugin into a directory we can drop into our Plugins/ directory. For example, from our plugin class library folder:\ndotnet build -o PluginClassLibrary/ ⚠ Remember that the folder must be named the same as the assembly file (the .dll) or Shale won’t load the plugin. You should then end up with a directory called PluginClassLibrary with our compiled plugin in it. Once you’ve built or published your HostApp, just open the folder (wherever the executable ends up), create a folder named “Plugins” and copy your newly created “PluginClassLibrary” folder into it. The next time you run HostApp.exe/HostApp, it will automatically discover and load the services from your plugin at startup!\nWrap-up linkThat’s it! Now that might have seemed like a lot, but we’ve gone into quite a bit of detail here. There’s not actually that much to it!\nSet up your projects, add the Shale packages as necessary, set up your DI container, add your call to AddPlugins and put your compiled plugins in the “Plugins” directory.\nSample linkNow if you made it this far, here’s a bonus: there’s an entire sample project recreating this whole walkthrough!\nIf you check the samples directory of the repository, you’ll find a sample project of both the host app (in the host folder) and a simple plugin (in the plugin folder). This is a complete ready-to-run sample!\nYou can run the host app using dotnet run (or from your IDE) to see how it works without any plugins, then jump over to the plugin/ folder, and build in Release mode (i.e. dotnet build -c Release) to build the plugin straight into the right folder for the host app to find. Run the host app again and you’ll see it load the plugin and how the behaviour changes.\nThe sample app uses Spectre.Console.Cli, Spectre.Console.Cli.Extensions.DependencyInjection and Shale to demonstrate loading plugins for a simple CLI application.\n"
+            }
+        );
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script></body></html>
