@@ -1,0 +1,128 @@
+# Note: Template blocks require a 'weight' parameter so they're correctly ordered on the landing page
+
+# Hero
+hero:
+  enable: true
+  weight: 10
+  template: hero
+
+  # backgroundImage:
+  #   path: "images/templates/hero"
+  #   filename:
+  #     desktop: "gradient-desktop.webp"
+  #     mobile: "gradient-mobile.webp"
+
+  badge:
+    text: Preview
+    color: primary # primary, secondary, success, danger, warning, info, light, dark
+    pill: false # boolean
+    soft: true # boolean
+
+  # titleLogo:
+  #   path: "images/logos"
+  #   filename: "title_logo.png"
+  #   alt: "Lotus Docs Logo"
+  #   height: 80px
+
+  title: "Shale"
+  subtitle: A lightweight opinionated library to add plugins support to your apps, powered by DotNetCorePlugins.
+
+  # image:
+  #   path: "images" # path to image under configured assets directory. default 'images'
+  #   filename: "lotus_docs_screenshot.png" # filename of your hero image (including file extension)
+  #   alt: "Lotus Docs Screenshot" # Optional but recommended
+  #   boxShadow: true # default 'false' (excludes .svg images)
+  #   rounded: true # round the image corners? default 'false' (excludes .svg images)
+
+  cta2Button:
+    icon: menu_book
+    btnText: "Get Started"
+    url: "/docs/introduction/"
+  # cta2Button:
+  #   icon: rocket_launch
+  #   btnText: "Download"
+  #   url: "https://github.com/agc93/shale/releases"
+
+  info: "**Open Source** MIT Licensed."
+
+# Feature Grid
+featureGrid:
+  enable: true
+  weight: 20
+  template: feature grid
+
+  title: What is Shale?
+  subtitle: Shale is a lightweight but opinionated library with a flexible API that you can use to add plugin support in your applications.
+
+  items:
+    - title: Powerful
+      icon: speed
+      description: Powered by the DotNetCorePlugins library by Nate McMaster.
+
+    - title: Open Source
+      icon: terminal
+      description: Shale is available with an MIT license, ready to be hacked on or extended.
+
+    - title: Configurable
+      icon: settings
+      description: Fluent configuration API to tweak how your app and its plugins are loaded.
+
+
+# Image Compare
+imageCompare:
+  enable: false
+  weight: 30
+  template: image compare
+
+  title: Customise The Lotus Docs Appearance
+  subtitle: Much of Lotus Docs' appearance can be customised. Dark mode is optional (enabled by default) and you can choose a Google font that suites you via the config parameters.
+
+  items:
+    - title: Dark Mode
+      config: {
+        startingPoint: 50,
+        addCircle: true,
+        addCircleBlur: false,
+        showLabels: true,
+        labelOptions: {
+          before: 'Dark',
+          after: 'Light',
+          onHover: false
+        }
+      }
+      imagePath: "images/screenshots"
+      imageBefore: "lotusdocs_dark_v0.8.webp"
+      imageAfter: "lotusdocs_light_v0.8.webp"
+
+    - title: Custom Fonts
+      config: {
+        controlColor: "#3C4257",
+        startingPoint: 25,
+        addCircle: true,
+        addCircleBlur: false,
+        showLabels: true,
+        labelOptions: {
+          before: 'Inter',
+          after: 'Life Saver',
+          onHover: false
+        }
+      }
+      imagePath: "images/screenshots"
+      imageBefore: "lotusdocs_google_font_demo_inter_screenshot.webp"
+      imageAfter: "lotusdocs_google_font_demo_lifesavers_screenshot.webp"
+
+    - title: Accent Color
+      config: {
+        startingPoint: 25,
+        addCircle: true,
+        addCircleBlur: true,
+        showLabels: true,
+        labelOptions: {
+          before: 'Blue',
+          after: 'Cardinal',
+          onHover: false
+        }
+      }
+      imagePath: "images/screenshots"
+      imageBefore: "lotusdocs_blue_theme_colour.webp"
+      imageAfter: "lotusdocs_cardinal_theme_colour.webp"
