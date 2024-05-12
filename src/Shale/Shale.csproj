@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="../PackageMetadata.props" />
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DebugType>embedded</DebugType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageDescription>
+      The main library for Shale: a lightweight wrapper API for quickly loading plugins in .NET apps using McMaster.NETCore.Plugins.
+    </PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>
