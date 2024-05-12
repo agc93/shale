@@ -25,7 +25,6 @@ var solution = ParseSolution(solutionPath);
 var projects = GetProjects(solutionPath, configuration);
 var artifacts = "./dist/";
 var testResultsPath = MakeAbsolute(Directory(artifacts + "./test-results"));
-var plugins = new List<string> { "Sputter.LibreHardwareMonitor" };
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
