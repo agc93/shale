@@ -53,7 +53,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// a plugin builder, and instead rely on the extension methods on <see cref="IServiceCollection"/>.
 	/// </summary>
 	public PluginBuilder() {
-		SearchPaths.AddRange(PluginBuilder<TPlugin>.GetDefaultPaths());
+		SearchPaths.AddRange(GetDefaultPaths());
 		SearchConventions.Add(new DynamicSearchConvention(FindDefaultPluginPaths));
 	}
 
@@ -92,6 +92,47 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 		if (pathsList.Count > 0) {
 			foreach (var path in pathsList) {
 				AddSearchPath(path);
+			}
+		}
+		return this;
+	}
+
+	// ReSharper disable once MemberCanBePrivate.Global
+	/// <summary>
+	/// Adds a new relative search path for Shale to search when loading plugin assemblies. Shale will search for this
+	/// path relative to both the current directory and the executable directory.
+	/// </summary>
+	/// <param name="relativePath">
+	/// The relative path to search for plugins. This is often just a folder name like "Plugins".
+	/// </param>
+	/// <returns>The current builder.</returns>
+	public PluginBuilder<TPlugin> AddRelativeSearchPath(string relativePath) {
+		if (!string.IsNullOrWhiteSpace(relativePath)) {
+			var candidates = new List<string> {
+				Path.Combine(AppContext.BaseDirectory, relativePath),
+				Path.Combine(Environment.CurrentDirectory, relativePath)
+			};
+			foreach (var candidatePath in candidates) {
+				AddSearchPath(candidatePath);
+			}
+		}
+		return this;
+	}
+
+	/// <summary>
+	/// Adds multiple new search paths for Shale to search when loading plugin assemblies. Shale will search for these
+	/// paths relative to both the current directory and the executable directory.
+	/// </summary>
+	/// <param name="relativePaths">
+	/// The relative paths to search for plugins when loading plugins. 
+	/// This is often just a folder name like "Plugins".
+	/// </param>
+	/// <returns>The current builder.</returns>
+	public PluginBuilder<TPlugin> AddRelativeSearchPaths(IEnumerable<string> relativePaths) {
+		var pathsList = relativePaths.ToList();
+		if (pathsList.Count > 0) {
+			foreach (var path in pathsList) {
+				AddRelativeSearchPath(path);
 			}
 		}
 		return this;
@@ -156,7 +197,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 
 	/// <summary>
 	/// Adds types to be "force-loaded" from any discovered plugin. Force loading types will always register any types  
-	/// with the DI container if they are assignable to <see cref="TService"/>.
+	/// with the DI container if they are assignable to any of the given types.
 	/// </summary>
 	/// <param name="types">The service types to identify and register implementations for.</param>
 	/// <returns>The current builder.</returns>
@@ -288,7 +329,9 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 			PluginLoader.CreateFromAssemblyFile(
 				pluginDll.FullName, 
 				sharedTypes: [.. SharedTypes],
-			c => c.PreferSharedTypes = PreferSharedTypes))
+			c => {
+				c.PreferSharedTypes = PreferSharedTypes;
+			}))
 			.ToList();
 	}
 
