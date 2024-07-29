@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
 
 namespace Shale;
 
@@ -60,7 +61,9 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	private static List<string> GetDefaultPaths() {
 		return [
 				Path.Combine(AppContext.BaseDirectory, "Plugins"),
-				Path.Combine(Environment.CurrentDirectory, "Plugins")
+				Path.Combine(Environment.CurrentDirectory, "Plugins"),
+				Path.Combine(AppContext.BaseDirectory, "plugins"),
+				Path.Combine(Environment.CurrentDirectory, "plugins")
 			];
 	}
 
@@ -337,7 +340,10 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 
 	// ReSharper disable once MemberCanBePrivate.Global
 	public IEnumerable<PluginLoader> BuildLoaders() {
-		var loaders = SearchPaths.Distinct().Select(sp => Path.IsPathRooted(sp) 
+		var comp = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+			? StringComparer.InvariantCultureIgnoreCase
+			: StringComparer.InvariantCulture;
+		var loaders = SearchPaths.Distinct(comp).Select(sp => Path.IsPathRooted(sp) 
 			? sp 
 			: Path.GetFullPath(sp)).SelectMany(BuildLoaders);
 		return loaders;
