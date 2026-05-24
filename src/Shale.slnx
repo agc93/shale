@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../build.cake" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="Shale.Abstractions/Shale.Abstractions.csproj" />
+  <Project Path="Shale/Shale.csproj" />
+</Solution>

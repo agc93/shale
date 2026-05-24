@@ -4,7 +4,7 @@ Shale is a thin but opinionated abstraction layer over Nate McMaster's excellent
 
 ## Building
 
-Building Shale locally should be pretty simple. Ensure you have the .NET 8 SDK installed, and `dotnet` available in 
+Building Shale locally should be pretty simple. Ensure you have the .NET 10 SDK installed, and `dotnet` available in 
 your `PATH`. 
 
 First, restore required build tools:
@@ -16,9 +16,9 @@ dotnet tool restore
 Now you can run a build with the Cake script in the repo:
 
 ```bash
-dotnet cake
+dotnet build.cs
 # or to build all artifacts
-dotnet cake --target=Publish
+dotnet build.cs --target=Publish
 ```
 
 This will build all the component projects and (assuming you used the `Publish` target) create all relevant build artifacts in the `dist/` folder.
