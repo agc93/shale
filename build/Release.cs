@@ -1,7 +1,7 @@
 using Cake.Core;
 public sealed class ReleaseTasks : ITaskModule
 {
-    public List<string> RequiredTools => ["nuget:?package=NuGet.CommandLine&version=7.6.0"];
+    public List<string> RequiredTools => [];
     public void Register(Func<string, CakeTaskBuilder> task, ICakeContext context, BuildConfiguration state)
     {
         task("Publish-NuGet-Package")
@@ -26,10 +26,12 @@ public sealed class ReleaseTasks : ITaskModule
         var nugetToken = context.EnvironmentVariable("NUGET_TOKEN");
         var pkgFiles = context.GetFiles($"{config.ArtifactsPath}package/*.nupkg");
         context.Information($"Pushing {pkgFiles.Count()} package files!");
-        context.NuGetPush(pkgFiles, new NuGetPushSettings {
-            Source = "https://api.nuget.org/v3/index.json",
-            ApiKey = nugetToken
-        });
+        foreach (var pkg in pkgFiles) {
+            context.DotNetNuGetPush(pkg.ToString(), new DotNetNuGetPushSettings {
+                Source = "https://api.nuget.org/v3/index.json",
+                ApiKey = nugetToken
+            });
+        }
     }
 
     public static void BuildNuGetPackage(ICakeContext context, BuildConfiguration config) {
