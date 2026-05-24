@@ -11,14 +11,14 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <OutDir>..\host\HostApp\bin\Debug\net8.0\Plugins\PluginClassLibrary\</OutDir>
+    <OutDir>..\host\HostApp\bin\Debug\net10.0\Plugins\PluginClassLibrary\</OutDir>
     <DebugType>Embedded</DebugType>
   </PropertyGroup>
 
