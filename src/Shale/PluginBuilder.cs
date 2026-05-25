@@ -24,16 +24,16 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// <remarks>
 	/// This only affects the lifetime of services registered when searching for implementations of types added with
 	/// the <see cref="AlwaysLoad"/> API. Services added by plugins using <see cref="IPlugin.ConfigureServices"/> are
-	/// unaffected.
+	/// unaffected. Setting this to null will disable registering force-loaded types with the DI container.
 	/// </remarks>
 	/// <exception cref="ArgumentOutOfRangeException">An invalid service lifetime has been provided.</exception>
-	public RegistrationType DefaultRegistrationType {
+	public ServiceLifetime? DefaultRegistrationType {
 		set =>
 			_register = value switch {
-				RegistrationType.None => (collection, _, _) => collection,
-				RegistrationType.Singleton => (services, type, impl) => services.AddSingleton(type, impl),
-				RegistrationType.Scoped => (services, type, impl) => services.AddScoped(type, impl),
-				RegistrationType.Transient => (services, type, impl) => services.AddTransient(type, impl),
+				null => (services, type, impl) => services,
+				ServiceLifetime.Singleton => (services, type, impl) => services.AddSingleton(type, impl),
+				ServiceLifetime.Scoped => (services, type, impl) => services.AddScoped(type, impl),
+				ServiceLifetime.Transient => (services, type, impl) => services.AddTransient(type, impl),
 				_ => throw new ArgumentOutOfRangeException(nameof(DefaultRegistrationType))
 			};
 	}
@@ -71,8 +71,12 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// <summary>
 	/// Adds a new search path for Shale to search when loading plugin assemblies.
 	/// </summary>
-	/// <param name="path">The path to search for plugins. This should generally be a path to a directory.</param>
+	/// <param name="path">The path to search for plugins. This should be a directory whose subdirectories each contain a plugin assembly.</param>
 	/// <returns>The current builder.</returns>
+	/// <remarks>
+	/// If <paramref name="path"/> directly contains <c>.dll</c> files, Shale assumes the plugin assembly's own directory
+	/// was provided and will search the parent directory instead.
+	/// </remarks>
 	public PluginBuilder<TPlugin> AddSearchPath(string path) {
 		if (!string.IsNullOrWhiteSpace(path)
 				&& Directory.Exists(path)
@@ -209,7 +213,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// </remarks>
 	/// <returns>The current builder.</returns>
 	/// <exception cref="ArgumentOutOfRangeException">An invalid service lifetime has been provided.</exception>
-	public PluginBuilder<TPlugin> UseDefaultRegistration(RegistrationType registrationType) {
+	public PluginBuilder<TPlugin> UseDefaultRegistration(ServiceLifetime registrationType) {
 		DefaultRegistrationType = registrationType;
 		return this;
 	}
