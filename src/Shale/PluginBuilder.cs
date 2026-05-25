@@ -345,21 +345,25 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// <param name="services">The DI container to register services with. A new one will be created if not provided.</param>
 	/// <param name="config">An optional configuration to be provided to plugin type implementations.</param>
 	/// <param name="disableLoaderInjection">
-	/// Whether plugin types should be able to inject services from the host's DI container. When this is true, plugin
-	/// types are added to the provided DI container and resolved from that container. When this is false, a new "clean"
-	/// DI container is created on execution and plugin types are resolved from the clean container. 
+	/// Whether plugin types should be able to inject services from the host's DI container. When this is false (default),
+	/// plugin types are added to the provided DI container and resolved from that container. When this is true, a new
+	/// "clean" DI container is created on execution and plugin types are resolved from the clean container. 
 	/// </param>
 	/// <returns>The DI container.</returns>
 	public IServiceCollection BuildServices(IServiceCollection? services = null, IConfiguration? config = null, bool disableLoaderInjection = false) {
 		services ??= new ServiceCollection();
 		try {
-			config ??= services.BuildServiceProvider().GetService<IConfiguration>();
+			using var configProvider = services.BuildServiceProvider();
+			config ??= configProvider.GetService<IConfiguration>();
 		} catch {
 			//ignored
 		}
 		var provider = disableLoaderInjection ? new ServiceCollection() : services;
 		var loaders = BuildLoaders();
+		// BuildLoaders() is lazy — accumulate instances as we iterate so we can register them below.
+		var loadedLoaders = new List<PluginLoader>();
 		foreach (var loader in loaders) {
+			loadedLoaders.Add(loader);
 			// shake your
 			var ass = loader.LoadDefaultAssembly();
 			var types = ass.GetTypes();
@@ -382,8 +386,20 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 				// ReSharper restore LoopCanBeConvertedToQuery
 			}
 		}
-		var allLoaders = provider.BuildServiceProvider().GetServices<TPlugin>();
-		return allLoaders.Aggregate(services, (current, dynamicLoader) => {
+		// Materialise plugin instances before disposing the provider; plugins are resolved
+		// here only to call ConfigureServices, not to be reused by the host.
+		List<TPlugin> allPlugins;
+		using (var pluginProvider = provider.BuildServiceProvider()) {
+			allPlugins = [.. pluginProvider.GetServices<TPlugin>()];
+		}
+		// Register loaders after pluginProvider is disposed — if provider == services (i.e.
+		// disableLoaderInjection is false), registering earlier would cause pluginProvider's
+		// disposal to dispose the loaders prematurely. Registered here, the host's ServiceProvider
+		// owns their lifetime and disposes them at shutdown.
+		foreach (var loader in loadedLoaders) {
+			services.AddSingleton(loader);
+		}
+		return allPlugins.Aggregate(services, (current, dynamicLoader) => {
 			if (GuardAction.Invoke((dynamicLoader))) {
 				LoadAction.Invoke(dynamicLoader);
 				return dynamicLoader.ConfigureServices(current, config);
