@@ -218,16 +218,40 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 		return this;
 	}
 
+	/// <summary>
+	/// Adds a custom search convention as an inline function. Shale will call <paramref name="searchConvention"/>
+	/// for each configured search path and include any returned assemblies alongside those found by other conventions.
+	/// </summary>
+	/// <param name="searchConvention">
+	/// A function that receives a search directory and returns the <see cref="FileInfo"/> instances pointing to
+	/// plugin <c>.dll</c> files within it.
+	/// </param>
+	/// <returns>The current builder.</returns>
 	public PluginBuilder<TPlugin> AddSearchConvention(Func<string, IEnumerable<FileInfo>> searchConvention) {
 		SearchConventions.Add(new DynamicSearchConvention(searchConvention));
 		return this;
 	}
 
+	/// <summary>
+	/// Adds a custom search convention by type. Shale will instantiate <typeparamref name="TConvention"/> and call it
+	/// for each configured search path, combining its results with those of other registered conventions.
+	/// </summary>
+	/// <typeparam name="TConvention">
+	/// The <see cref="ISearchConvention"/> implementation to use. Must have a public parameterless constructor.
+	/// </typeparam>
+	/// <returns>The current builder.</returns>
 	public PluginBuilder<TPlugin> AddSearchConvention<TConvention>() where TConvention : ISearchConvention, new() {
 		SearchConventions.Add(new TConvention());
 		return this;
 	}
 
+	/// <summary>
+	/// Adds a custom search convention instance. Shale will call <paramref name="convention"/> for each configured
+	/// search path and include any returned assemblies alongside those found by other conventions.
+	/// </summary>
+	/// <param name="convention">The convention instance to add.</param>
+	/// <typeparam name="TConvention">The <see cref="ISearchConvention"/> implementation to use.</typeparam>
+	/// <returns>The current builder.</returns>
 	public PluginBuilder<TPlugin> AddSearchConvention<TConvention>(TConvention convention)
 		where TConvention : ISearchConvention {
 		SearchConventions.Add(convention);
@@ -291,9 +315,6 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	}
 
 	private List<PluginLoader> BuildLoaders(string pluginsDir) {
-		// create plugin loaders
-		// var pluginsDir = pluginSearchPath ?? Path.Combine(AppContext.BaseDirectory, "plugins");
-		
 		_logger?.LogDebug("Loading all plugins from {PluginsDir}", pluginsDir);
 		// var paths = FindPluginPaths(pluginsDir);
 		var paths = SearchConventions.Aggregate(new List<FileInfo>(), (current, convention) => {
@@ -307,20 +328,6 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 			}
 			return current;
 		});
-		// if (!Directory.Exists(pluginsDir)) return [];
-		// foreach (var dir in Directory.GetDirectories(pluginsDir).Distinct()) {
-		// 	var dirName = Path.GetFileName(dir);
-		// 	var pluginDll = Path.Combine(dir, dirName + ".dll");
-		// 	if (File.Exists(pluginDll)) {
-		// 		_loggerFunc?.Invoke($"Plugin located! Loading {pluginDll}");
-		// 		var loader = PluginLoader.CreateFromAssemblyFile(
-		// 			pluginDll,
-		// 			sharedTypes: [.. SharedTypes],
-		// 			c => c.PreferSharedTypes = PreferSharedTypes
-		// 		);
-		// 		loaders.Add(loader);
-		// 	}
-		// }
 		return paths.Distinct().Select(pluginDll => 
 			PluginLoader.CreateFromAssemblyFile(
 				pluginDll.FullName, 

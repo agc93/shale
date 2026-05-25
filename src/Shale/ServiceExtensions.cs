@@ -11,6 +11,10 @@ public static class ServiceExtensions {
 	/// <param name="services">The DI container to use for plugin type registration.</param>
 	/// <param name="sharedTypes">An optional list of types to share between the host and plugins.</param>
 	/// <returns>The DI container.</returns>
+	/// <remarks>
+	/// This overload uses <see cref="IPlugin"/> as the plugin type. To use a custom plugin type,
+	/// use <see cref="AddPlugins{TPlugin}(IServiceCollection, Func{PluginBuilder{TPlugin}, PluginBuilder{TPlugin}})"/> instead.
+	/// </remarks>
 	public static IServiceCollection AddPlugins(
 		this IServiceCollection services,
 		IEnumerable<Type>? sharedTypes = null) {
