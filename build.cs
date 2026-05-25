@@ -58,8 +58,7 @@ Task("Test")
     DotNetTest(config.SolutionPath, new DotNetTestSettings
     {
         Configuration = config.Configuration,
-        NoBuild = true,
-        PathType = DotNetTestPathType.Solution
+        NoBuild = true
     });
 });
 

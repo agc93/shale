@@ -5,4 +5,6 @@
   </Folder>
   <Project Path="Shale.Abstractions/Shale.Abstractions.csproj" />
   <Project Path="Shale/Shale.csproj" />
+  <Project Path="../tests/Shale.TestPlugin/Shale.TestPlugin.csproj" />
+  <Project Path="../tests/Shale.Tests/Shale.Tests.csproj" />
 </Solution>
