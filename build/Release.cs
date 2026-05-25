@@ -8,7 +8,7 @@ public sealed class ReleaseTasks : ITaskModule
             .IsDependentOn("NuGet")
             .WithCriteria(() => context.HasEnvironmentVariable("NUGET_TOKEN"))
             .WithCriteria(() => context.HasEnvironmentVariable("GITHUB_REF"))
-            .WithCriteria(() => context.EnvironmentVariable("GITHUB_REF").StartsWith("refs/tags/v") || EnvironmentVariable("GITHUB_REF") == "refs/heads/main")
+            .WithCriteria(() => context.EnvironmentVariable("GITHUB_REF").StartsWith("refs/tags/v") || context.EnvironmentVariable("GITHUB_REF") == "refs/heads/main")
             .Does<BuildConfiguration>(PublishNuGetPackage);
         
         task("NuGet")

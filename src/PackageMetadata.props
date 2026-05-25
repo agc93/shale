@@ -4,7 +4,6 @@
         <Copyright>© Alistair Chapman 2024</Copyright>
         <RepositoryUrl>https://github.com/agc93/shale</RepositoryUrl>
         <PackageProjectUrl>https://agc93.github.io/shale/</PackageProjectUrl>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageTags>plugins modular modularity dynamic</PackageTags>
     </PropertyGroup>
 </Project>
