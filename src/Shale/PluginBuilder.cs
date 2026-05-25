@@ -302,8 +302,8 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 				if (pluginPaths.Count > 0) {
 					current.AddRange(pluginPaths);
 				}
-			} catch {
-				_logger?.LogWarning("Error encountered while loading plugins from {PluginsDir}", pluginsDir);
+			} catch (Exception e) {
+				_logger?.LogWarning(e, "Error encountered while loading plugins from {PluginsDir}", pluginsDir);
 			}
 			return current;
 		});
