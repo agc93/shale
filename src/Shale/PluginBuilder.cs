@@ -1,4 +1,4 @@
-﻿using McMaster.NETCore.Plugins;
+using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -13,7 +13,7 @@ namespace Shale;
 /// <typeparam name="TPlugin">The plugin type to use.</typeparam>
 public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 
-	private Action<string>? _loggerFunc;
+	private ILogger? _logger;
 	private List<Type> SharedTypes { get; set; } = [typeof(TPlugin), typeof(IServiceCollection), typeof(ILogger), typeof(ILogger<>), typeof(IConfiguration)];
 	private List<Type> ForceLoadTypes { get; set; } = [];
 	private List<ISearchConvention> SearchConventions { get; } = [];
@@ -146,21 +146,9 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// </summary>
 	/// <param name="logger">The logger to use.</param>
 	/// <returns>The current builder.</returns>
-	/// <remarks>Messages from Shale will be logged as Debug messages.</remarks>
+	/// <remarks>Most messages from Shale will be logged as Debug messages.</remarks>
 	public PluginBuilder<TPlugin> UseLogger(ILogger logger) {
-		_loggerFunc = msg => logger.LogDebug("{Message}", msg);
-		return this;
-	}
-
-	/// <summary>
-	/// Adds a factory for an <see cref="ILogger"/> to use when logging debug messages from Shale. This factory will be
-	/// invoked each time a debug message is logged.
-	/// </summary>
-	/// <param name="loggerFunc">A function returning an <see cref="ILogger"/> implementation.</param>
-	/// <returns>The current builder.</returns>
-	/// <remarks>Messages from Shale will be logged as Debug messages.</remarks>
-	public PluginBuilder<TPlugin> UseLogger(Func<ILogger> loggerFunc) {
-		_loggerFunc = msg => loggerFunc().LogDebug("{Message}", msg);
+		_logger = logger;
 		return this;
 	}
 
@@ -170,7 +158,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	/// <returns>The current builder.</returns>
 	/// <remarks>Messages will be written with a `PluginLoader: ` prefix.</remarks>
 	public PluginBuilder<TPlugin> UseConsoleLogging() {
-		_loggerFunc = msg => Console.WriteLine($"PluginLoader: {msg}");
+		_logger = new ConsoleLogger();
 		return this;
 	}
 
@@ -292,7 +280,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 			var dirName = Path.GetFileName(dir);
 			var pluginDll = Path.Combine(dir, dirName + ".dll");
 			if (File.Exists(pluginDll)) {
-				_loggerFunc?.Invoke($"Plugin located! Loading {pluginDll}");
+				_logger?.LogDebug("Plugin located! Loading {PluginPath}", pluginDll);
 				yield return new FileInfo(pluginDll);
 			}
 		}
@@ -301,7 +289,8 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 	private List<PluginLoader> BuildLoaders(string pluginsDir) {
 		// create plugin loaders
 		// var pluginsDir = pluginSearchPath ?? Path.Combine(AppContext.BaseDirectory, "plugins");
-		_loggerFunc?.Invoke($"Loading all plugins from {pluginsDir}");
+		
+		_logger?.LogDebug("Loading all plugins from {PluginsDir}", pluginsDir);
 		// var paths = FindPluginPaths(pluginsDir);
 		var paths = SearchConventions.Aggregate(new List<FileInfo>(), (current, convention) => {
 			try {
@@ -310,7 +299,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 					current.AddRange(pluginPaths);
 				}
 			} catch {
-				_loggerFunc?.Invoke($"Error encountered while loading plugins from {pluginsDir}!");
+				_logger?.LogWarning("Error encountered while loading plugins from {PluginsDir}", pluginsDir);
 			}
 			return current;
 		});
@@ -379,7 +368,7 @@ public class PluginBuilder<TPlugin> where TPlugin : IPlugin {
 					provider.AddSingleton(typeof(TPlugin), pluginType);
 				}
 			} else {
-				_loggerFunc?.Invoke($"Found no compatible plugin types in {ass.FullName}");
+				_logger?.LogDebug("Found no compatible plugin types in {AssemblyName}", ass.FullName);
 			}
 
 			if (ForceLoadTypes.Count > 0) {
